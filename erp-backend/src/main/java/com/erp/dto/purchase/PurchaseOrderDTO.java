@@ -11,7 +11,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PurchaseOrderDTO {
     private Long id;
-    private Long supplierId;
+    private String supplierName;
     private LocalDate orderDate;
     private BigDecimal totalAmount;
+    private String productName;
+    private Integer quantity;
+    private String orderStatus;
+    private String rejectionReason;
 }
