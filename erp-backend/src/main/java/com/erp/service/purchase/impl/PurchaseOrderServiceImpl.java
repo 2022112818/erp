@@ -34,6 +34,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         // 如果没有设置状态，默认设为待审核
         if (!StringUtils.hasText(entity.getOrderStatus())) {
             entity.setOrderStatus("PENDING");
+        } else {
+            if (!entity.getOrderStatus().equals("PENDING")) {
+                throw new RuntimeException("无法设置待审核之外的状态");
+            }
         }
 
         mapper.insert(entity);
@@ -45,41 +49,83 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         BeanUtils.copyProperties(dto, entity);
         if (!StringUtils.hasText(entity.getOrderStatus())) {
             entity.setOrderStatus("PENDING");
+        } else {
+            if (!entity.getOrderStatus().equals("PENDING")) {
+                throw new RuntimeException("无法设置待审核之外的状态");
+            }
         }
         mapper.update(entity);
     }
 
     @Override
     public void delete(Long id) {
+        // 只有待审核状态的订单才能删除
+        PurchaseOrder order = mapper.findById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+
+        if (!"PENDING".equals(order.getOrderStatus())) {
+            throw new RuntimeException("只有待审核状态的订单才能删除");
+        }
+
         mapper.delete(id);
     }
 
     @Override
     public void approve(Long id) {
-        PurchaseOrder entity = mapper.findById(id);
-        if (entity != null) {
-            entity.setOrderStatus("APPROVED");
-            entity.setRejectionReason(null); // 清空拒绝原因
-            mapper.update(entity);
+        PurchaseOrder order = mapper.findById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
         }
+
+        if (!"PENDING".equals(order.getOrderStatus())) {
+            throw new RuntimeException("只有待审核状态的订单才能审核通过");
+        }
+
+        // 更新订单状态为已审核
+        order.setOrderStatus("APPROVED");
+        order.setRejectionReason(null); // 清空拒绝原因
+
+        mapper.update(order);
     }
 
     @Override
     public void reject(Long id, String reason) {
-        PurchaseOrder entity = mapper.findById(id);
-        if (entity != null) {
-            entity.setOrderStatus("REJECTED");
-            entity.setRejectionReason(reason);
-            mapper.update(entity);
+        PurchaseOrder order = mapper.findById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
         }
+
+        if (!"PENDING".equals(order.getOrderStatus())) {
+            throw new RuntimeException("只有待审核状态的订单才能拒绝");
+        }
+
+        if (reason == null || reason.trim().isEmpty()) {
+            throw new RuntimeException("拒绝原因不能为空");
+        }
+
+        // 更新订单状态为已拒绝，并设置拒绝原因
+        order.setOrderStatus("REJECTED");
+        order.setRejectionReason(reason);
+
+        mapper.update(order);
     }
 
     @Override
     public void pay(Long id) {
-        PurchaseOrder entity = mapper.findById(id);
-        if (entity != null) {
-            entity.setOrderStatus("COMPLETED");
-            mapper.update(entity);
+        PurchaseOrder order = mapper.findById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
         }
+
+        if (!"APPROVED".equals(order.getOrderStatus())) {
+            throw new RuntimeException("只有已审核状态的订单才能支付");
+        }
+
+        // 更新订单状态为已完成
+        order.setOrderStatus("COMPLETED");
+
+        mapper.update(order);
     }
 }

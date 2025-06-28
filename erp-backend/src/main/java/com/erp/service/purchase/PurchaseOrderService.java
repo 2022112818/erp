@@ -3,6 +3,8 @@ package com.erp.service.purchase;
 
 import com.erp.dto.purchase.PurchaseOrderDTO;
 import com.erp.entity.purchase.PurchaseOrder;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface PurchaseOrderService {

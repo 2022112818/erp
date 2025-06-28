@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class PurchaseOrderDTO {
     private Long id;
     private String supplierName;
-    private LocalDate orderDate;
+    private LocalDate orderDate; // 预计到货时间
     private BigDecimal totalAmount;
     private String productName;
     private Integer quantity;

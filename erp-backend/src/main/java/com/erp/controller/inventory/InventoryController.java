@@ -35,24 +35,4 @@ public class InventoryController {
         return Result.success(inventory);
     }
 
-    @Operation(summary = "新增库存")
-    @PostMapping("/create")
-    public Result<String> createInventory(@RequestBody InventoryDTO inventoryDTO) {
-        inventoryService.createInventory(inventoryDTO);
-        return Result.success("库存新增成功");
-    }
-
-    @Operation(summary = "更新库存")
-    @PutMapping("/update")
-    public Result<String> updateInventory(@RequestBody InventoryDTO inventoryDTO) {
-        inventoryService.updateInventory(inventoryDTO);
-        return Result.success("库存更新成功");
-    }
-
-    @Operation(summary = "删除库存")
-    @DeleteMapping("/delete/{id}")
-    public Result<String> deleteInventory(@PathVariable Long id) {
-        inventoryService.deleteInventory(id);
-        return Result.success("库存删除成功");
-    }
 }

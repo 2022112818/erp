@@ -6,11 +6,12 @@ const routes = [
   { path: '/login', component: () => import('../views/Login/Login.vue') },
   { path: '/dashboard', component: () => import('../views/Dashboard/Dashboard.vue'),
     children: [
-      { path: '/inventory', component: () => import('../views/Inventory/InventoryList.vue') },
+      { path: '/inventory', component: () => import('../views/Inventory/InventoryManagement.vue') },
       { path: '/purchase', component: () => import('../views/PurchaseOrder/PurchaseOrderList.vue') },
       { path: '/sales', component: () => import('../views/SalesOrder/SalesOrderList.vue') },
       { path: '/product', component: () => import('../views/Product/ProductList.vue') },
-      { path: '/auth', component: () => import('../views/User/UserList.vue') }
+      { path: '/auth', component: () => import('../views/User/UserList.vue') },
+      { path: '/checking', component: () => import('../views/Checking/CheckingList.vue') }
     ]
   }
 ]

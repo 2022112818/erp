@@ -6,7 +6,7 @@
       <el-table-column prop="supplierName" label="供应商名称" />
       <el-table-column prop="productName" label="货品名称" />
       <el-table-column prop="quantity" label="货品数量" />
-      <el-table-column prop="orderDate" label="订单日期" />
+      <el-table-column prop="orderDate" label="预计到货日期" />
       <el-table-column prop="totalAmount" label="总金额" />
       <el-table-column prop="orderStatus" label="状态">
         <template #default="scope">
@@ -52,7 +52,7 @@
         <el-form-item label="货品数量">
           <el-input v-model="form.quantity" type="number" placeholder="请输入货品数量" />
         </el-form-item>
-        <el-form-item label="订单日期">
+        <el-form-item label="预计到货日期">
           <el-date-picker
             v-model="form.orderDate"
             type="date"

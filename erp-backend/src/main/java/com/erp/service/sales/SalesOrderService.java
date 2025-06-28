@@ -3,6 +3,8 @@ package com.erp.service.sales;
 
 import com.erp.dto.sales.SalesOrderDTO;
 import com.erp.entity.sales.SalesOrder;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface SalesOrderService {

@@ -1,14 +1,13 @@
 
 package com.erp.service.inventory.impl;
 
-import com.erp.dto.inventory.InventoryDTO;
 import com.erp.entity.inventory.Inventory;
 import com.erp.mapper.inventory.InventoryMapper;
 import com.erp.service.inventory.InventoryService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,21 +27,23 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public void createInventory(InventoryDTO dto) {
-        Inventory entity = new Inventory();
-        BeanUtils.copyProperties(dto, entity);
-        inventoryMapper.insert(entity);
-    }
-
-    @Override
-    public void updateInventory(InventoryDTO dto) {
-        Inventory entity = new Inventory();
-        BeanUtils.copyProperties(dto, entity);
-        inventoryMapper.update(entity);
-    }
-
-    @Override
-    public void deleteInventory(Long id) {
-        inventoryMapper.delete(id);
+    public void changeInventory(Long warehouseId, String productName, Integer delta) {
+        List<Inventory> list = inventoryMapper.search(warehouseId, productName);
+        if (list.isEmpty()) {
+            if (delta <= 0) {
+                throw new RuntimeException();
+            }
+            Inventory inventory = new Inventory(null, productName, warehouseId, delta, LocalDateTime.now());
+            inventoryMapper.insert(inventory);
+        } else {
+            if (list.size() != 1 || list.get(0).getId() == null) {
+                throw new RuntimeException();
+            }
+            if (delta >= 0 || list.get(0).getQuantity() + delta >= 0) {
+                inventoryMapper.update(list.get(0).getId(), delta, LocalDateTime.now());
+            } else {
+                throw new RuntimeException();
+            }
+        }
     }
 }

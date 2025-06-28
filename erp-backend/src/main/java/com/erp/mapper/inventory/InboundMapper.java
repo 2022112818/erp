@@ -14,12 +14,6 @@ public interface InboundMapper {
     @Select("SELECT * FROM inbound_record")
     List<Inbound> findAll();
 
-    @Insert("INSERT INTO inbound_record (purchase_order_id, warehouse_id, quantity, inboundDate, operator, remark) VALUES (#{purchaseOrderId}, #{warehouseId}, #{quantity}, #{inboundDate}, #{operator}, #{remark})")
+    @Insert("INSERT INTO inbound_record (product_name, warehouse_id, quantity, inbound_date, operator, remark) VALUES (#{productName}, #{warehouseId}, #{quantity}, #{inboundDate}, #{operator}, #{remark})")
     void insert(Inbound obj);
-
-    @Update("UPDATE inbound_record SET purchase_order_id=#{purchaseOrderId}, warehouse_id=#{warehouseId}, quantity=#{quantity}, inboundDate=#{inboundDate}, operator=#{operator}, remark=#{remark} WHERE id=#{id}")
-    void update(Inbound obj);
-
-    @Delete("DELETE FROM inbound_record WHERE id =#{id}")
-    void delete(@Param("id") Long id);
 }

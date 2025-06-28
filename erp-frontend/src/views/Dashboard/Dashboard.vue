@@ -8,6 +8,7 @@
         <el-menu-item index="/sales">销售管理</el-menu-item>
         <el-menu-item index="/product">商品管理</el-menu-item>
         <el-menu-item index="/auth">用户管理</el-menu-item>
+        <el-menu-item index="/checking">采购审核</el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>

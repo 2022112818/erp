@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Data
 public class PurchaseOrder {
     private Long id;
-    private String supplierName;;
-    private LocalDate orderDate;
+    private String supplierName;
+    private LocalDate orderDate; // 预计到货时间
     private BigDecimal totalAmount;
     private String productName;
     private Integer quantity;

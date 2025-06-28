@@ -3,6 +3,8 @@ package com.erp.service.inventory;
 
 import com.erp.dto.inventory.WarehouseDTO;
 import com.erp.entity.inventory.Warehouse;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface WarehouseService {

@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InventoryDTO {
     private Long id;
-    private Long productId;
+    private String productName;
     private Long warehouseId;
     private Integer quantity;
-
-    // getter and setter
 }

@@ -3,6 +3,8 @@ package com.erp.service.product;
 
 import com.erp.dto.product.ProductDTO;
 import com.erp.entity.product.Product;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface ProductService {

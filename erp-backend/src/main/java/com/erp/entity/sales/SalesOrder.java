@@ -10,6 +10,8 @@ import java.time.LocalDate;
 public class SalesOrder {
     private Long id;
     private Long customerId;
+    private String productName;
     private LocalDate orderDate;
     private BigDecimal totalAmount;
+    private String salesperson;
 }

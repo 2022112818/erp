@@ -3,6 +3,8 @@ package com.erp.service.inventory;
 
 import com.erp.dto.inventory.StockAlertDTO;
 import com.erp.entity.inventory.StockAlert;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface StockAlertService {
