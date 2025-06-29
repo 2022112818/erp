@@ -374,7 +374,7 @@ function loadData(view) {
 
 function loadInboundData() {
   request.get('/inventory/inbound/list').then(res => {
-    inboundData.value = res.data
+    inboundData.value = res.data.data
   }).catch(err => {
     ElMessage.error('加载入库数据失败')
   })
@@ -382,7 +382,7 @@ function loadInboundData() {
 
 function loadOutboundData() {
   request.get('/inventory/outbound/list').then(res => {
-    outboundData.value = res.data
+    outboundData.value = res.data.data
   }).catch(err => {
     ElMessage.error('加载出库数据失败')
   })
@@ -390,7 +390,7 @@ function loadOutboundData() {
 
 function loadProductionData() {
   request.get('/inventory/production/list').then(res => {
-    productionData.value = res.data
+    productionData.value = res.data.data
   }).catch(err => {
     ElMessage.error('加载生产数据失败')
   })
@@ -398,7 +398,7 @@ function loadProductionData() {
 
 function loadInventoryData() {
   request.get('/inventory/list').then(res => {
-    inventoryData.value = res.data
+    inventoryData.value = res.data.data
   }).catch(err => {
     ElMessage.error('加载库存数据失败')
   })

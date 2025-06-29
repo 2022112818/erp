@@ -152,7 +152,7 @@ function getStatusText(status) {
 
 function getList() {
   request.get('/purchase/purchaseOrder/list').then(res => {
-    tableData.value = res.data
+    tableData.value = res.data.data
   })
 }
 

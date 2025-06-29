@@ -8,6 +8,7 @@ import com.erp.service.purchase.PurchaseOrderService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class PurchaseOrderController {
 
     @Operation(summary = "创建采购订单管理")
     @PostMapping("/create")
+    @Transactional
     public Result<String> create(@RequestBody PurchaseOrderDTO dto) {
         service.create(dto);
         return Result.success("创建成功");
@@ -39,6 +41,7 @@ public class PurchaseOrderController {
 
     @Operation(summary = "更新采购订单管理")
     @PutMapping("/update")
+    @Transactional
     public Result<String> update(@RequestBody PurchaseOrderDTO dto) {
         service.update(dto);
         return Result.success("更新成功");
@@ -46,6 +49,7 @@ public class PurchaseOrderController {
 
     @Operation(summary = "删除采购订单管理")
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public Result<String> delete(@PathVariable Long id) {
         service.delete(id);
         return Result.success("删除成功");
@@ -53,6 +57,7 @@ public class PurchaseOrderController {
 
     @Operation(summary = "审核采购订单")
     @PutMapping("/approve/{id}")
+    @Transactional
     public Result<String> approve(@PathVariable Long id) {
         service.approve(id);
         return Result.success("审核通过");
@@ -60,6 +65,7 @@ public class PurchaseOrderController {
 
     @Operation(summary = "拒绝采购订单")
     @PutMapping("/reject/{id}")
+    @Transactional
     public Result<String> reject(@PathVariable Long id, @RequestParam String reason) {
         service.reject(id, reason);
         return Result.success("审核拒绝");
@@ -67,6 +73,7 @@ public class PurchaseOrderController {
 
     @Operation(summary = "支付采购订单")
     @PutMapping("/pay/{id}")
+    @Transactional
     public Result<String> pay(@PathVariable Long id) {
         service.pay(id);
         return Result.success("支付成功");

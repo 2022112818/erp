@@ -40,7 +40,7 @@ const dialogTitle = ref("")
 const form = reactive({ id: "", username: "", password: "", role: "" })
 
 function getList() {
-  request.get('/auth/user/list').then(res => { tableData.value = res.data })
+  request.get('/auth/user/list').then(res => { tableData.value = res.data.data })
 }
 getList()
 

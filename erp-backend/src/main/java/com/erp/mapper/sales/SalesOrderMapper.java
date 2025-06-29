@@ -14,7 +14,7 @@ public interface SalesOrderMapper {
     @Select("SELECT * FROM sales_order")
     List<SalesOrder> findAll();
 
-    @Insert("INSERT INTO sales_order (customer_id, order_date, total_amount) VALUES (#{customerId}, #{orderDate}, #{totalAmount})")
+    @Insert("INSERT INTO sales_order (customer_id, product_name, order_date, total_amount) VALUES (#{customerId}, #{productName}, #{orderDate}, #{totalAmount})")
     void insert(SalesOrder obj);
 
     @Update("UPDATE sales_order SET customer_id=#{customerId}, order_date=#{orderDate}, total_amount=#{totalAmount} WHERE id=#{id}")

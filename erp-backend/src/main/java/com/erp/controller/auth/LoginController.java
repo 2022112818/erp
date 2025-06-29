@@ -1,6 +1,7 @@
 
 package com.erp.controller.auth;
 
+import com.alibaba.fastjson.JSONObject;
 import com.erp.common.result.Result;
 import com.erp.entity.auth.User;
 import com.erp.mapper.auth.UserMapper;
@@ -24,7 +25,15 @@ public class LoginController {
         User user = userMapper.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             String token = JwtUtil.generateToken(username);
-            return Result.success(token);
+            Result<String> result = Result.success(token);
+
+            JSONObject json = new JSONObject();
+            json.put("id", user.getId());
+            json.put("role", user.getRole());
+            String jsonString = json.toJSONString();
+            result.setData(jsonString);
+
+            return result;
         } else {
             return Result.failure("用户名或密码错误");
         }
