@@ -7,6 +7,7 @@ import com.erp.service.inventory.ProductionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class ProductionServiceImpl implements ProductionService {
 
     @Override
     public void create(ProductionDTO dto) {
+        dto.setProductionTime(LocalDateTime.now());
         mapper.insertProductionRecord(dto);
         service.changeInventory(dto.getProductWarehouseId(), dto.getProductName(), dto.getProductQuantity());
         if (dto.getMaterials() != null && !dto.getMaterials().isEmpty()) {
